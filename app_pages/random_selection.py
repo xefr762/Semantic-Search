@@ -5,8 +5,9 @@ import random
 #st.set_page_config(page_title="Случайные фильмы", page_icon="🍀", layout='wide')
 def run():
     # read df
-    path = '/home/marena/Elbrus_phase_2/Semantic-Search/test.csv'
-    df = pd.read_csv(path, index_col='Unnamed: 0')
+    path = '/home/marena/Elbrus_phase_2/Semantic-Search/clear_all.csv'
+    df = pd.read_csv(path)
+    df = df[['title_full', 'description']]
 
     # Функция генерации и вывода 10 рандомных фильмов из датафрейма
     #l, mid, r = st.columns(3)
@@ -25,7 +26,7 @@ def run():
     output = st.session_state['rand_movies']
 
     row1 = st.columns(3)
-    row2 = st.columns(4)
+    row2 = st.columns(3)
     row3 = st.columns(3)
 
     rows = row1 + row2 + row3
@@ -37,10 +38,10 @@ def run():
             st.session_state[key] = False
 
         expanded = st.session_state[key]
-        height = 250 if expanded else 130
+        height = 300 if expanded else 160
         tile = col.container(height=height)
 
-        tile.subheader(f'🎬 {movie["Title"]}')
+        tile.subheader(f'🎬 {movie['title_full']}')
 
         def toggle_description(k=key):                   # Функция, изменяющая "состояние" кнопки
             st.session_state[k] = not st.session_state[k]
@@ -51,4 +52,4 @@ def run():
             on_click=toggle_description
         )
         if expanded:
-            tile.write(movie["Description"])
+            tile.write(movie['description'])
