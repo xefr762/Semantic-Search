@@ -2,12 +2,16 @@ import streamlit as st
 import pandas as pd
 import random
 
-#st.set_page_config(page_title="Случайные фильмы", page_icon="🍀", layout='wide')
-def run():
-    # read df
-    path = '/home/marena/Elbrus_phase_2/Semantic-Search/clear_all.csv'
+@st.cache_data
+def load_df():
+    path = 'data/movie_data.csv'
     df = pd.read_csv(path)
     df = df[['title_full', 'description']]
+    return df
+
+def run():
+    # read df
+    df = load_df()
 
     # Функция генерации и вывода 10 рандомных фильмов из датафрейма
     #l, mid, r = st.columns(3)
@@ -38,10 +42,10 @@ def run():
             st.session_state[key] = False
 
         expanded = st.session_state[key]
-        height = 300 if expanded else 160
+        height = 330 if expanded else 180
         tile = col.container(height=height)
 
-        tile.subheader(f'🎬 {movie['title_full']}')
+        tile.subheader(f"🎬 {movie['title_full']}")
 
         def toggle_description(k=key):                   # Функция, изменяющая "состояние" кнопки
             st.session_state[k] = not st.session_state[k]

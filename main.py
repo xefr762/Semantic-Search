@@ -24,10 +24,15 @@ if st.session_state.page == "Главная":
     - **Release 1.0**: 🍀 Рандомный выбор 10 фильмов, испытай свою удачу! 🎰
     - **Release 2.0**: Подбор кино по запросу 👀
     - **Release 3.0**: Подбор кино на по запросу с использованием GPT 🥂
-    - **Information**: Метрики работы моделей, использующихся в сервисе 📊
     Переключайтесь между страницами через левый сайдбар! 
     """)
 
 elif st.session_state.page == "Рандом":
     from app_pages import random_selection
     random_selection.run()
+elif st.session_state.page == "Подбор":
+    from app_pages import bert
+    bert.run()
+elif st.session_state.page == "Генерация":
+    from app_pages import gpt_generation
+    gpt_generation.run()
