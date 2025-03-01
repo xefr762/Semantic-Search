@@ -55,4 +55,4 @@ https://...streamlit.app/...
 
 1. Запустите приложение Streamlit:
 
-   streamlit run main.py
+   streamlit run app.py
